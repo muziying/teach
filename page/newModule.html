@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>模块编辑</title>
+<link rel="stylesheet" href="./../css/layui.css">
+<link rel="stylesheet" href="./../css/page/classList.css">
+<link rel="stylesheet" href="./../css/page/classDetail.css">
+<link rel="stylesheet" href="./../css/page/newClass.css">
+</head>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">教研后台管理</div>
+            <!-- 头部区域） -->
+            <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item">同步教学</li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">高一数学</a>
+            </li>
+            </ul>
+            <!-- 用户信息 -->
+            <ul class="layui-nav layui-layout-right">
+                <!-- 退出登录 -->
+                <li class="layui-nav-item"><a href="javascript:;" id="logout">退出</a></li>
+          </ul>
+        </div>
+        <!-- 内容主体区域 -->
+        <div class="contain">
+            <h2>课程标题</h2>
+            <div class="newModule">
+                <p class="tit">模块设置</p>
+                <ul class="mList">
+                    <li><button class="layui-btn" id="addModule">添加模块</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class='shape hide'>
+        <div class='m_type' id='m_type'>
+            <p class='tit'>选择新增模块类型</p>
+            <div class="layui-form-item" pane>
+                <div class="layui-input-block">
+                    <input type="radio" name="pick_m" id="0" value="知识点" title="知识点" checked>知识点
+                    <input type="radio" name="pick_m" id="1" value="例题" title="例题">例题
+                    <input type="radio" name="pick_m" id="2" value="练习" title="练习">练习
+                    <input type="radio" name="pick_m" id="3" value="文本阐述" title="文本阐述">文本阐述
+                    <input type="radio" name="pick_m" id="4" value="作业" title="作业">作业
+                    <input type="radio" name="pick_m" id="5" value="导学案" title="导学案">导学案
+                </div>
+            </div>
+            <button class="layui-btn" id='m_type_sure'>确定</button>
+        </div>
+        <div class='m_type hide' id='m_add_way'>
+                <p class='tit'>选择添加方式</p>
+                <div class="layui-form-item" pane>
+                    <div class="layui-input-block">
+                        <input type="radio" name="pick_type" id="0" value="从题库中添加" title="从题库中添加" checked>从题库中添加
+                        <input type="radio" name="pick_type" id="1" value="新增" title="新增">新增
+                    </div>
+                </div>
+                <button class="layui-btn demo" data-type="newClass">确定</button>
+            </div>
+    </div>
+<script src="./../layui.all.js"></script>
+<script src="./../comm.js"></script>
+<script src="./../js/newModule.js"></script>
+</body>
+</html>

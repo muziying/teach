@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>新建知识点</title>
+<link rel="stylesheet" href="./../../css/layui.css">
+<link rel="stylesheet" href="./../../css/openPage/newClass.css">
+</head>
+<body>
+    <div class="contain">
+        <ul class="class-type">
+                <li class="layui-form-item">
+                        <p>模块标题</p>
+                        <div class="li-r">
+                            <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                                <div class="layui-input-block" style="width:100%;margin-left:0">
+                                    <input type="text" name="title" lay-verify="required|title" required placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                  </div>
+                              </form>
+                        </div>
+                    </li>
+                    <li class="layui-form-item">
+                            <p>模块时间</p>
+                            <div class="li-r">
+                                <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                                    <div class="layui-input-block" style="margin-left:0">
+                                        <select class="form-control input-sm" name="interest" lay-filter="interest" aria-invalid="false">
+                                          <option value="0">5</option>
+                                          <option value="1">10</option>
+                                          <option value="2">15</option>
+                                        </select>
+                                      </div>
+                                  </form>
+                            </div>
+                        </li>
+                        <li class="layui-form-item">
+                                <p>知识点</p>
+                                <div class="li-r">
+                                    <form class="layui-form">
+                                        <div class="layui-form-item">
+                                          <textarea name="edit1" id="edit1" class="layui-hide">
+                                        
+                                          </textarea>
+                                        </div>
+                                      </form>
+                                </div>
+                            </li>
+                            <li class="layui-form-item">
+                                    <p>教学提示</p>
+                                    <div class="li-r">
+                                        <form class="layui-form">
+                                            <div class="layui-form-item">
+                                              <textarea name="edit2" id="edit2" class="layui-hide">
+                                            
+                                              </textarea>
+                                            </div>
+                                          </form>
+                                    </div>
+                                </li>
+                                <li class="layui-form-item">
+                                        <p>设置红卡/蓝卡</p>
+                                        <div class="li-r">
+                                            <button class="layui-btn demo" data-type="newCard">新增卡</button>
+                                        </div>
+                                    </li>
+                    <li class="layui-form-item" style="text-align:center">
+                            <button class="layui-btn demo" data-type="release">发布</button>
+                        </li>
+        </ul>
+    </div>
+<script src="./../../layui.all.js"></script>
+<script src="./../../comm.js"></script>
+<script>
+layui.use(['layer','layedit'], function(){
+  var layedit = layui.layedit
+    ,layer = layui.layer
+    ,table = layui.table
+    ,$ = layui.$
+    ,form = layui.form;
+
+   //触发事件
+   var active = {
+    //    新增红蓝卡窗口
+        newCard: function(){
+            layer.open({
+              type: 2
+              ,content: './newCard.html'
+              ,area: ['600px', '400px']
+              ,maxmin: true
+            });
+        },
+        // 文本阐述发布
+        release:function(){
+            var tit=$(".layui-input").val()
+                ,time=$("option:checked").text()
+                ,class_con = layedit.getContent(index)
+                ,class_tip = layedit.getContent(index1);
+                if(tit&&categoryName&&class_con&&class_tip){
+                    $.ajax({
+                        url:base_url+"/research/v1/Textexpounds/insertText",
+                        type:'post',
+                        dataType:'json',
+                        data:{
+                            'title':tit,
+                            'type':2,
+                            'content':class_con,
+                            'moduleTime':time,
+                            'teachingTips':class_tip
+                        },
+                        success:function(data){
+                            console.log(data);
+                            if(data.code==0){
+                                layer.msg(data.msg, {
+                                    offset: '180px'
+                                    ,icon: 1
+                                    ,time: 1000
+                                });
+                            }
+                        }
+                    })
+                }
+        }
+    }
+    $('.demo').on('click', function(){
+        var type = $(this).data('type');
+        active[type] ? active[type].call(this) : '';
+      });
+  
+  var index = layedit.build('edit1', {
+    //hideTool: ['image']
+    uploadImage: {
+      
+    }
+    //,tool: []
+    ,height: 100
+  });
+  var index1 = layedit.build('edit2', {
+    //hideTool: ['image']
+    uploadImage: {
+      
+    }
+    //,tool: []
+    ,height: 100
+  });
+  
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+tbody .layui-table-cell{
+    height:90px;
+    line-height: 90px;
+}
+.layui-table-cell div{
+    width:100%;
+    height:100%;
+    line-height:35px;
+}
+.layui-table-cell div p{
+    width:100%;
+    height:60px;
+    background:green;
+    text-align: center;
+    line-height: 60px;
+    color:#fff;
+}
+.layui-table-cell div button{
+    width:70px;
+    height:24px;
+    padding:0;
+    text-align: center;
+    line-height:24px;  
+}

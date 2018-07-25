@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>知识库</title>
+<link rel="stylesheet" href="./../css/layui.css">
+<link rel="stylesheet" href="./../css/page/classList.css">
+<link rel="stylesheet" href="./../css/openPage/newClass.css">
+<link rel="stylesheet" href="./../css/ztree/tree.css">
+<link rel="stylesheet" href="./../css/ztree/zTreeStyle.css">
+<style>
+    .contain{
+        padding:30px;
+    }
+    .contain form{
+        margin-bottom: 20px;
+    }
+    .con-l{
+        width:28%;
+        float: left;
+        border:1px solid #e5e5e5;
+        background: #fff;
+    }
+    .con-r{
+        width:68%;
+        float: right;
+        border:1px solid #e5e5e5;
+        background: #fff;
+    }
+</style>
+</head>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">教研后台管理</div>
+            <!-- 头部区域） -->
+            <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item">同步教学</li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">高一数学</a>
+                <!-- <dl class="layui-nav-child">
+                    <dd><a href="">高一数学</a></dd>
+                    <dd><a href="">高一数学</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl> -->
+            </li>
+            </ul>
+            <!-- 用户信息 -->
+            <ul class="layui-nav layui-layout-right">
+                <!-- 退出登录 -->
+                <li class="layui-nav-item"><a href="javascript:;" id="logout">退出</a></li>
+          </ul>
+        </div>
+        <!-- 内容主体区域 -->
+        <div class="contain">
+                <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                        <div class="layui-inline">
+                        <label class="layui-form-label">学段</label>
+                        <div class="layui-input-block">
+                          <select name="xueduan" lay-verify="required" lay-verType="tips" id="xueduan">
+                                <option value="0">高一</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="layui-inline">
+                            <label class="layui-form-label">科目</label>
+                            <div class="layui-input-block">
+                              <select name="version" lay-verify="required" lay-verType="tips" id="version">
+                                    <option value="0">数学</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="layui-inline">
+                                <label class="layui-form-label">版本</label>
+                                <div class="layui-input-block">
+                                  <select name="jiaocai" lay-verify="required" lay-verType="tips" id="jiaocai">
+                                        <option value="0">人教A版</option>
+                                  </select>
+                                </div>
+                              </div>
+                    </form>
+                    <div class='con-l'><ul id="treeDemo" class="ztree"></ul></div>
+                    <div class='con-r'></div>
+        </div>
+    </div>
+<script src="./../js/ztree/jquery-1.9.1.js"></script>
+<script src="./../js/ztree/jquery.ztree.all.js"></script>
+<script src="./../layui.all.js"></script>
+<script src="./../comm.js"></script>
+<script>
+    layui.use(['layer'],function(){
+        var $ = layui.jquery, layer = layui.layer;
+
+        
+
+    // ztree
+    var zNodes =null;//数据
+        var setting = {
+            data:{
+                simpleData:{
+                    enable: true,//确定 zTree 初始化时的节点数据、异步加载时的节点数据、或 addNodes 方法中输入的 newNodes 数据是否采用简单数据模式 (Array),不需要用户再把数据库中取出的 List 强行转换为复杂的 JSON 嵌套格式
+                    idKey: "id",//节点数据中保存唯一标识的属性名称
+                    pIdKey: "pid",//节点数据中保存其父节点唯一标识的属性名称
+                    rootPId: 0//用于修正根节点父节点数据，即 pIdKey 指定的属性值
+                }
+            },
+            callback: {
+                onClick: onClick//单击出现/隐藏子节点
+            }
+        };
+        var zTree;
+        $(document).ready(function(){
+            //章节数基础数据
+          $.ajax({
+            url:base_url + '/research/v1/sample/getsuchtopicknowledgetree',
+            type:'post',
+            dataType:'json',
+            success:function(data){
+                zNodes = data.result;
+                zTree = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+            }
+          }) 
+        });
+//        列表树 赋值
+        function getTreeData(res) {
+            zNodes =res;
+            zTree = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        }
+//        单击展开收起
+        function onClick(e,treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+            zTree.expandNode(treeNode);
+        }
+    })
+
+</script>
+</body>
+</html>

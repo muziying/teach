@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>新增卡片</title>
+<link rel="stylesheet" href="./../../css/layui.css">
+<link rel="stylesheet" href="./../../css/openPage/newClass.css">
+<style>
+  .card-enter-box{
+    width:100%;height:100%;position: fixed;background: rgba(0,0,0,0.5);top:0;left: 0;
+  }
+  .card-enter{
+    width:400px;height:340px;margin:50px auto;padding:20px;background: #fff;border-radius:10px;
+  }
+  .card-enter h2{
+    text-align: center;margin-bottom: 15px;
+  }
+  ul{
+    margin-bottom: 10px;
+  }
+  li.layui-form-item{
+    margin:0 auto;border:0;padding:5px;
+  }
+</style>
+</head>
+<body>
+    <div class="contain">
+        <h2 style="text-align: center;margin-bottom: 20px;">新增红卡/蓝卡</h2>
+        <ul class="class-type">
+            <li class="layui-form-item">
+                <p>卡名称</p>
+                <div class="li-r">
+                    <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                        <div class="layui-input-block" style="width:100%;margin-left:0">
+                          <input type="text" name="title" lay-verify="required|title" required placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </form>
+                </div>
+            </li>
+            <li class="layui-form-item">
+                <p>卡类型</p>
+                <div class="li-r">
+                    <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                        <div class="layui-input-block" style="margin-left:0">
+                            <select name="interest" lay-filter="interest">
+                              <option value="0">红卡</option>
+                              <option value="1">蓝卡</option>
+                            </select>
+                          </div>
+                    </form>
+                </div>
+            </li>
+            <li class="layui-form-item">
+                <p>知识点</p>
+                <div class="li-r">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                          <textarea name="edit1" id="edit1" class="layui-hide"></textarea>
+                        </div>
+                      </form>
+                </div>
+            </li>
+            <li class="layui-form-item" style="text-align:center">
+                <button class="layui-btn demo" data-type="submitCard">保存</button>
+            </li>
+        </ul>
+    </div>
+    <div class="card-enter-box">
+      <div class="card-enter">
+        <h2>选择录入标签</h2>
+        <ul>
+            <li class="layui-form-item">
+                <p>学段</p>
+                <div class="li-r">
+                    <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                        <div class="layui-input-block" style="width:200px;margin:0;">
+                            <select name="xueduan" lay-filter="interest" id="xueduan">
+                            </select>
+                          </div>      
+                    </form>
+                </div>
+            </li>
+            <li class="layui-form-item">
+                <p>学科</p>
+                <div class="li-r">
+                    <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                        <div class="layui-input-block" style="width:200px;margin:0;">
+                            <select name="xueke" lay-filter="interest" id="xueke">
+                            </select>
+                          </div>      
+                    </form>
+                </div>
+            </li>
+            <li class="layui-form-item">
+                <p>一级标题</p>
+                <div class="li-r">
+                    <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                        <div class="layui-input-block" style="width:200px;margin:0;">
+                            <select name="tit1" lay-filter="interest" id="tit1">
+                            </select>
+                          </div>      
+                    </form>
+                </div>
+            </li>
+            <li class="layui-form-item">
+                <p>二级标题</p>
+                <div class="li-r">
+                    <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                        <div class="layui-input-block" style="width:200px;margin:0;">
+                            <select name="tit2" lay-filter="interest" id="tit2">
+                            </select>
+                          </div>      
+                    </form>
+                </div>
+            </li>
+            <li class="layui-form-item">
+                <p>三级标题</p>
+                <div class="li-r">
+                    <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                        <div class="layui-input-block" style="width:200px;margin:0;">
+                            <select name="tit3" lay-filter="interest" id="tit3">
+                            </select>
+                          </div>      
+                    </form>
+                </div>
+            </li>
+        </ul>
+        <div style="text-align: center"><button class="layui-btn">录入</button><button class="layui-btn">取消</button></div>
+        
+    </div>
+  </div>
+    
+<script src="./../../layui.all.js"></script>
+<script src="./../../comm.js"></script>
+<script>
+layui.use('layedit', function(){
+  var layedit = layui.layedit
+      ,$ = layui.jquery
+      , layer = layui.layer;
+  
+  var index = layedit.build('edit1', {
+    height: 100
+  });
+
+    //触发事件
+    var active = {
+      // 保存红蓝卡
+      submitCard:function(){
+        var tit=$("input[name=title]").val()
+            ,con=layedit.getContent(index)
+            ,type=$("option:checked").attr("value");
+            if(tit&&con&&type){
+              $.ajax({
+                url:base_url+"/research/v1/sample/insertredorbluecard",
+                type:"post",
+                data:{
+                  cardsName:tit,
+                  content:con,
+                  type:type
+                },
+                dataType:"json",
+                success:function(data){
+                  if(data.code==0){
+                    layer.confirm(data.msg, {
+                      btn: ['录入知识库','取消'] //按钮
+                    }, function(){
+                      layer.msg('的确很重要', {icon: 1});
+                    }, function(){
+                      layer.close();
+                    });
+                  }
+                }
+              })
+            }
+      }
+    }
+    $('.demo').on('click', function(){
+      var type = $(this).data('type');
+      active[type] ? active[type].call(this) : '';
+    });
+
+    // 新增红蓝卡（选择标签） 获取所有的数据
+    $.ajax({
+      url:base_url+"/research/v1/sample/getChapters",
+      type:"post",
+      dataType:"json",
+      success:function(data){
+        console.log(data);
+      }
+    })
+  
+});
+</script>
+</body>
+</html>

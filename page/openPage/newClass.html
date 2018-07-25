@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>新建教学</title>
+<link rel="stylesheet" href="./../../css/layui.css">
+<link rel="stylesheet" href="./../../css/openPage/newClass.css">
+<link rel="stylesheet" href="./../../css//ztree/tree.css">
+<link rel="stylesheet" href="./../../css/ztree/zTreeStyle.css">
+</head>
+<body class="layui-layout-body">
+    <div class="contain">
+            <div class="layui-layout layui-layout-admin">
+            <div class="layui-header">
+                    <div class="layui-logo">教研后台管理</div>
+                    <!-- 头部区域） -->
+                    <ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item">同步教学</li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">高一数学</a>
+                    </li>
+                    </ul>
+                    <!-- 用户信息 -->
+                    <ul class="layui-nav layui-layout-right">
+                        <li class="layui-nav-item">
+                            <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                            贤心
+                        </li>
+                        <!-- 退出登录 -->
+                        <li class="layui-nav-item"><a href="javascript:;" id="logout">退出</a></li>
+                    </ul>
+                </div>
+            </div>
+        <ul class="class-type">
+            <li class="layui-form-item">
+                <p>选择章节</p>
+                <div class="li-r">
+                <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">选择学段</label>
+                        <div class="layui-input-block">
+                          <select name="xueduan" lay-verify="required" lay-verType="tips" id="xueduan">
+                          </select>
+                        </div>
+                    </div>
+                      <div class="layui-inline">
+                            <label class="layui-form-label">选择版本</label>
+                            <div class="layui-input-block">
+                              <select name="version" lay-verify="required" lay-verType="tips" id="version">
+                              </select>
+                            </div>
+                          </div>
+                          <div class="layui-inline">
+                                <label class="layui-form-label">选择教材</label>
+                                <div class="layui-input-block">
+                                  <select name="jiaocai" lay-verify="required" lay-verType="tips" id="jiaocai">
+                                  </select>
+                                </div>
+                              </div>
+                    </form>
+                    <ul id="treeDemo" class="ztree"></ul>
+                </div>
+                
+            </li>
+            <li class="layui-form-item">
+                    <p>已选章节</p>
+                    <div class="li-r">
+                        <span class="checkeds">1111<button class="layui-btn">删除</button></span>
+                    </div>
+                </li>
+                <li class="layui-form-item">
+                        <p>适用范围</p>
+                        <div class="li-r">
+                            <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                                <div class="layui-input-block" style="width:200px;margin:0;">
+                                    <select name="interest" lay-filter="interest">
+                                      <option value=""></option>
+                                      <option value="0">写作</option>
+                                    </select>
+                                  </div>      
+                            </form>
+                        </div>
+                    </li>
+                    <li class="layui-form-item">
+                            <p>班型设置</p>
+                            <div class="li-r">
+                                <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                                    <div class="layui-input-block" style="width:200px;margin:0;">
+                                        <select name="banxing" lay-filter="interest" id="banxing">
+                                        </select>
+                                      </div>  
+                                </form>
+                            </div>
+                        </li>
+                        <li class="layui-form-item">
+                                <p>课次设置</p>
+                                <div class="li-r">
+                                    <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                                        <div class="layui-input-block" style="width:200px;margin:0;">
+                                            <select name="interest" lay-filter="interest">
+                                              <option value=""></option>
+                                              <option value="0">写作</option>
+                                            </select>
+                                          </div>  
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="layui-form-item">
+                                    <p>难度设置</p>
+                                    <div class="li-r">
+                                        <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                                            <div class="layui-input-block" style="width:200px;margin:0;">
+                                                <select name="interest" lay-filter="interest">
+                                                  <option value=""></option>
+                                                  <option value="0">写作</option>
+                                                </select>
+                                              </div>  
+                                        </form>
+                                    </div>
+                                </li>
+                                <li class="layui-form-item">
+                                        <p>课程标题</p>
+                                        <div class="li-r">
+                                            <form class="layui-form layui-form-pane1" action="" lay-filter="first">
+                                                <div class="layui-input-block" style="width:100%;margin-left:0">
+                                                    <input type="text" name="title" lay-verify="required|title" required placeholder="请输入标题" autocomplete="off" class="layui-input">
+                                                  </div>      
+                                            </form>
+                                        </div>
+                                    </li>
+                                    <li class="layui-form-item" style="text-align:center">
+                                            <a href="../newModule.html" class="layui-btn demo" data-type="newClass">确定</a><button class="layui-btn">取消</button>
+                                        </li>
+        </ul>
+    </div>
+
+<script src="./../../comm.js"></script>
+<script src="./../../js/ztree/jquery-1.9.1.js"></script>
+<script src="./../../js/ztree/jquery.ztree.all.js"></script>
+<script src="./../../layui.all.js"></script>
+<script>
+
+  var zNodes =null;//数据
+        var setting = {
+          check:{
+            enable: true,
+            chkStyle: "checkbox",
+            chkboxType: { "Y": "p", "N": "s" },
+            chkDisabledInherit: false,
+            nocheckInherit: false
+          },
+            data:{
+                simpleData:{
+                    enable: true,//确定 zTree 初始化时的节点数据、异步加载时的节点数据、或 addNodes 方法中输入的 newNodes 数据是否采用简单数据模式 (Array),不需要用户再把数据库中取出的 List 强行转换为复杂的 JSON 嵌套格式
+                    idKey: "id",//节点数据中保存唯一标识的属性名称
+                    pIdKey: "pid",//节点数据中保存其父节点唯一标识的属性名称
+                    rootPId: 0//用于修正根节点父节点数据，即 pIdKey 指定的属性值
+                }
+            },
+            callback: {
+                onClick: onClick//单击出现/隐藏子节点
+            }
+        };
+        var zTree;
+        $(document).ready(function(){
+          $.ajax({
+            url:base_url + '/research/v1/course/getchpter',
+            type:'post',
+            dataType:'json',
+            success:function(data){
+                console.log(data);
+                zNodes = data.result;
+                zTree = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+              
+            }
+          })  
+        });
+//        列表树 赋值
+        function getTreeData(res) {
+            zNodes =res;
+            zTree = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        }
+//        单击展开收起
+        function onClick(e,treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+            zTree.expandNode(treeNode);
+        }
+
+
+
+   // 学段、版本、教材数据
+
+   layui.use(['layer', 'element','table','form'], function(){
+    var element = layui.element
+    ,table = layui.table
+    ,form = layui.form
+    ,$ = layui.jquery, layer = layui.layer;
+    
+    var getchaptersinfo = (type,elem) => {
+          $.ajax({
+              url:base_url + '/research/v1/course/getchaptersinfo',
+              type:'post',
+              dataType:'json',
+              data:{
+                  type:type
+              },
+              success:function(data){
+                  if(data.code == 0){
+                      var li='';
+                      for (var i in data.result){
+                          li+='<option value="'+i+'">'+data.result[i].name+'</option>';
+                      }
+                      elem.append(li);
+                      form.render('select');
+                  }
+              }
+          })
+      }
+      getchaptersinfo(1,$("#xueduan"));
+      getchaptersinfo(3,$("#version"));
+      getchaptersinfo(4,$("#jiaocai"));
+
+      // 获取班型列表
+      var getallclasstype = () => {
+          $.ajax({
+              url:base_url + '/research/v1/course/getallclasstype',
+              type:'post',
+              dataType:'json',
+              success:function(data){
+                console.log(data);
+                  if(data.code == 0){
+                      var li='';
+                      for (var i in data.data){
+                          li+='<option value="'+i+'">'+data.data[i].name+'</option>';
+                      }
+                      $("#banxing").append(li);
+                      form.render('select');
+                  }
+              }
+          })
+      }
+      getallclasstype();
+
+   })
+</script>
+</body>
+</html>
